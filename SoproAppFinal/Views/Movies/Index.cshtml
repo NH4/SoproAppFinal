@@ -1,0 +1,52 @@
+﻿@model IEnumerable<SoproAppFinal.Models.Movie>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MovieGenres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoviePersons)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @foreach (var genre in item.MovieGenres)
+            {
+
+                @Html.DisplayFor(genreItem => genre.Genre.Genre_Name)
+            }
+        </td>
+    <td>
+        @foreach (var person in item.MoviePersons)
+        {
+            @Html.DisplayFor(personItem => person.Person.Person_Name)
+        }
+    </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
